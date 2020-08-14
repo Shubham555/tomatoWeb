@@ -16,31 +16,80 @@
  
 </head>
 <body>
+<div class="container"><br><br>
 
-<div class="container">
-    <div class="row">
-        <div class="col-12" style="padding-top: 15px;">
-        <img src="img/Logo_Tomato.png" style="width: 300px;">
-        </div>
-        <div class="col-12 label_text" style="padding-bottom: 0px;"><h2>Add Category</h2></div>
-        
-        
-    </div>
-    <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-4">
-            <div class="form-group"><b>Enter Category Name</b>
-          <input type="text" class="form-control">
-          </div>
-        </div> 
-        <div class="col-4" style="padding-top: 10px;">
-            <button class="btn btn-success">Add Category</button>
-        </div>
+<!-- Modal HTML -->
+			<div class="shadow_card">
+                <form action="/examples/actions/confirmation.php" method="post">
+					<!--<h1 class="text1">TOMATO</h1>-->
+					<img src="img/Logo_Tomato.png" style="width: 300px;">
+                    <p class="text label_text" style="margin-top: 0px;margin-bottom: 0px;">Add Item</p>
+                 <div class="container">   
+                <div class="row">
+                    <div class="col-12" style="padding-bottom: 20px;">
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Upload Logo</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                          </div>
+                    </div>
+                    <br><br>
+				  <div class="col-xs-4 col-sm-4 col-md-4">
+					<div class="form-group"><b>Menu Item</b>
+						 <input type="text" class="form-control">
+                    </div>
+				  </div> 
 
-        
-    </div>
+				  <div class="col-xs-3 col-sm-3 col-md-3">
+					<div class="form-group"><b>Category</b>
+						<input type="text" class="form-control">
+                    </div>
+				</div> 
+
+				<div class="col-xs-5 col-sm-5 col-md-5">
+					<div class="form-group"><b>Enter Price</b>
+						<input type="number" class="form-control">
+                    </div>
+				</div> 
+		   </div>
+		   
+		      <div class="row">
+		         <div class="col-xs-4 col-sm-4 col-md-4">
+					<div class="form-group"><b>Menu Description</b>
+				  <input type="text" class="form-control">
+			      </div>
+		        </div> 
+			 </div>
+			 
+			 
+ 
+		<div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group"><b class="label_text">Select Type</b> <br><br>
+                    <input type="checkbox">&nbsp;
+                      <label for="self order">Self Order</label>
+                    <input type="checkbox">&nbsp;
+                       <label for="takeaway">Takeaway</label>&nbsp;
+                      <input type="checkbox">&nbsp;
+                        <label for="reservation">Reservation</label>&nbsp;
+                </div>
+            </div>
+	</div>
+ 
     <div class="row">
-        <div class="col-12 label_text" style="padding-bottom: 0px;"><h2>Menu Items</h2></div>
         <div class="col-12">
+             <b class="label_text">Ingredients Name</b> <br><br>
+                
+            </div>
+            <div class="input-group mb-3 col-6">
+                <br>
+                <input type="text" class="form-control" placeholder="Enter Ingredients Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">Add</span>
+                </div>
+              </div>
+              
+        </div>
+
         <div class="row">
             <div class="col-4" style="padding: 5px 20px;">
                 <div class="row" style="padding: 10px;background: #e1e1e1;border-radius: 5px;">
@@ -64,8 +113,14 @@
                 </div>
             </div>
             </div>
-        </div>
-    </div>
+</div> 
+   
+
+
 </div>
+	
+	   
+</div>
+              
 </body>
 </html>
