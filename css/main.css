@@ -1,0 +1,113 @@
+.shadow_card {
+    background: #FFFFFF;
+box-shadow: 0px 8px 25px 14px rgba(255, 0, 0, 0.07);
+border-radius: 16px;
+flex: 1 1 auto;
+padding: 1rem;
+}
+.pad-card{
+    padding: 10px;
+background: #e1e1e1;
+border-radius: 5px;
+}
+.label_text{
+    font-size: 18px;
+font-weight: bold;
+color: #ff2d2d;
+padding: 20px 15px;
+}
+
+body {
+	font-family: 'Varela Round', sans-serif;
+}
+.modal-body {
+	width: 1100px;
+    margin:40px auto;
+    box-shadow: 0 10px 25px;
+	border-radius: 20px;
+}
+.modal-body .text{
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff2d2d;
+    margin-top: 10%;
+	margin-left: 2%;
+}
+
+.login {
+  float: right;  
+  margin-top: -40px;
+  font-size: 20px;
+  color: #ff2d2d;
+}
+
+.login :hover {
+    text-decoration: none;
+}
+/*.modal-body .form-group {
+	margin-bottom: 20px;
+    width: 280px;
+    margin-left: 9%;
+}*/
+
+.modal-body .form-control {
+	min-height: 40px;
+	font-size: 15px;
+	transition: all 0.5s;
+}
+
+.merge {
+    background-color:#90ee90;
+    padding: 2px 20px;
+    border-radius: 20px;
+}
+.support {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 40%;
+}
+
+.form-group i{
+    position: absolute;
+}
+
+.modal-body .hint-text {
+	text-align: center;
+}
+.hint-text a:hover{
+    text-decoration: none;
+}
+.text1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff2d2d;
+}   
+
+.btn {      
+   background-color: #ff2d2d;  
+    color: white;
+    margin-top: 2%;
+    font-size: 17px;
+    font-weight:500;
+    width: 200px;
+    padding: 10px;
+}
+label {
+    color: #696969;
+}
+
+#type{
+    width: 80px;
+    padding: 5px;
+}
+a:hover{
+	text-decoration: none;
+}
+.fas{
+    color:white;
+    font-size: 20px;
+    margin-left: 13%;
+    margin-top: -3%;
+    cursor: pointer;
+}
