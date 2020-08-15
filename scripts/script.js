@@ -16,9 +16,12 @@ const getCuisines = new Promise(function executor(resolve, reject) {
 	});
 })
 
-const register = (user) => {
-	auth.signInWithEmailAndPassword(user.email, user.password).then(function() {
-		database.collection('request').add({
+const register = (user, callback) => {
+	let status = 0,
+		id = null;
+	auth.createUserWithEmailAndPassword(user.email, user.password).then(function(response) {
+		console.log('yes', response);
+		database.collection('requests').add({
 			company: user.company,
 			contact: user.contact,
 			cuisine_type: user.cuisine_type,
@@ -39,14 +42,14 @@ const register = (user) => {
 			vat: user.vat,
 			is_activated: false
 		}).then(function(docRef) {
-			return {status: 'Success', docid: docRed.id};
+			callback({status: 'Success', docid: docRef.id});
 		}).catch(function(err) {
-			return {status: 'Failure', error: err};
+			callback({status: 'Failure', error: err});
 		});
 	}).catch(function(error) {
   		// Handle Errors here.
   		var errorCode = error.code;
 	  	var errorMessage = error.message;
-	  	// ...
+	  	callback({status: 'Failure', error: error.message});
 	});
 }

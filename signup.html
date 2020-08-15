@@ -25,13 +25,13 @@
                 <div class="row">
 				  <div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group"><b>First Name</b>
-						 <input type="text" id="firstname" class="form-control">
+						 <input value="amit" type="text" id="firstname" class="form-control">
                     </div>
 				  </div> 
 
 				  <div class="col-xs-3 col-sm-3 col-md-3">
 					<div class="form-group"><b>Last Name</b>
-						<input type="text" id="lastname" class="form-control">
+						<input value="thakur" type="text" id="lastname" class="form-control">
                     </div>
 				</div> 
 
@@ -45,7 +45,7 @@
 		      <div class="row">
 		         <div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group"><b>Contact Number</b>
-				  <input type="number" id="contact" class="form-control">
+				  <input type="number" value="8850119211" id="contact" class="form-control">
 			      </div>
 		        </div> 
 			 </div>
@@ -68,7 +68,7 @@
 		<div class="row">
 			<div class="col-xs-7 col-sm-7 col-md-7">
 				<div class="form-group"><b>Restaurant Name</b>
-			 <input type="text" id="restaurant_name" class="form-control">
+			 <input type="text" value="Bunker" id="restaurant_name" class="form-control">
 			 </div>
 		   </div> 
 		   <div class="col-xs-5 col-sm-5 col-md-5">
@@ -81,12 +81,12 @@
 		<div class="row">
 			<div class="col-xs-7 col-sm-7 col-md-7">
 				<div class="form-group"><b>First Line Address</b>
-			 <input type="text" id="first_line_address" class="form-control">
+			 <input type="text" value="Indira Nagar No.3" id="first_line_address" class="form-control">
 			 </div>
 		   </div> 
 		   <div class="col-xs-5 col-sm-5 col-md-5">
 			<div class="form-group"><b>Street Name</b>
-		  <input type="text" id="street" class="form-control">
+		  <input type="text" value="JN RD" id="street" class="form-control">
 		  </div>
 		</div>
 	</div>
@@ -94,22 +94,22 @@
 	         <div class="row">
 		           <div class="col-xs-3 col-sm-3 col-md-3">
 					<div class="form-group"><b>Town/City</b>
-		            <input type="text" id="town" class="form-control">
+		            <input value="Mulund" type="text" id="town" class="form-control">
 		          </div>
 	           </div> 
 			   <div class="col-xs-3 col-sm-3 col-md-3">
 				<div class="form-group"><b>State</b>
-	               <input type="text" id="state" class="form-control">
+	               <input value="Maharashtra" type="text" id="state" class="form-control">
 	            </div>
 		   </div>
 		         <div class="col-xs-3 col-sm-3 col-md-3">
 					<div class="form-group"><b>Country</b>
-			     <input type="text" id="country" class="form-control">
+			     <input type="text" value="India" id="country" class="form-control">
 		     </div>
 	       </div>
 		        <div class="col-xs-3 col-sm-3 col-md-3">    
 					<div class="form-group"><b>Post Code</b>
-		           <input type="number" id="post" class="form-control">
+		           <input type="number" value="400080" id="post" class="form-control">
 	          </div>
          </div>
       </div>
@@ -117,9 +117,9 @@
 	  <div class="row">
 		<div class="col-xs-6 col-sm-6 col-md-6">
 			<div class="form-group"><b>Functionalities You want to Activate</b> <br>
-				<input name="functionalities" value="Self Order" type="checkbox">&nbsp;
+				<input name="functionalities" value="Self Order" type="checkbox" checked="checked">&nbsp;
 				  <label for="self order">Self Order</label>
-				<input name="functionalities" value="Takeaway" type="checkbox">&nbsp;
+				<input name="functionalities" value="Takeaway" type="checkbox" checked="checked">&nbsp;
 				   <label for="takeaway">Takeaway</label>&nbsp;
 				  <input name="functionalities" value="Reservation" type="checkbox">&nbsp;
 					<label for="reservation">Reservation</label>&nbsp;
@@ -127,7 +127,7 @@
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-6">
 			<div class="form-group"><b>Do you have any other branch of your restaurant?</b> <br>
-				<input name="has_branches" value="true" type="radio">&nbsp;
+				<input name="has_branches" value="true" type="radio" checked="checked">&nbsp;
 				  <label for="self order">Yes</label>
 				<input name="has_branches" value="false" type="radio">&nbsp;
 				   <label for="takeaway">No</label>&nbsp;
@@ -178,9 +178,10 @@
   			const user =  {
 				company: $('#company').val() || null,
 				contact: $('#contact').val() || null,
-				cuisine_type: $('#cuisine_type').val() || null,
+				cuisine_type: $('#cuisines').val() || null,
 				email: $('#email').val(),
 				password: $('#password').val(),
+				first_line_address: $('#first_line_address').val() || null,
 				firstname: $('#firstname').val() || null,
 				lastname: $('#lastname').val() || null,
 				functionalities: functionalities,
@@ -195,10 +196,11 @@
 				town: $('#town').val() || null,
 				vat: $('#vat').val() || null  			
 			}
-
-			if (register(user).status === 'Success') {
-				window.location.href = 'addCategory.html'
-			}
+			register(user, function(response) {
+				console.log(response);
+				if (response.status === 'Success')
+					window.location.href = 'addCategory.html';
+			});
   		}  	
   	$(function() {
 
