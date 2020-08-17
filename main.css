@@ -1,6 +1,6 @@
 .shadow_card {
     background: #FFFFFF;
-/*box-shadow: 0px 8px 25px 14px rgba(255, 0, 0, 0.07);*/
+box-shadow: 0px 8px 25px 14px rgba(255, 0, 0, 0.07);
 border-radius: 16px;
 flex: 1 1 auto;
 padding: 1rem;
@@ -17,27 +17,11 @@ color: #ff2d2d;
 padding: 20px 15px;
 }
 
-.row.items .row {
-    padding: 10px;background: #e1e1e1;border-radius: 5px;
-}
-
-#basic-addon2 {
-    cursor: pointer;
-}
-
-.row.items .item {
-    cursor: pointer;
-}
-
-.row.items .col-4 {
-    padding: 5px 20px;
-}
-
 body {
 	font-family: 'Varela Round', sans-serif;
 }
 .modal-body {
-	width: 1100px;
+	/* width: 1100px; */
     margin:40px auto;
     box-shadow: 0 10px 25px;
 	border-radius: 20px;
@@ -127,27 +111,28 @@ a:hover{
     margin-top: -3%;
     cursor: pointer;
 }
+
 .thank{
-    text-align: center;
+	text-align: center;
     font-size: 56px;
     font-weight: bold;
     color: #ff2d2d;
-    margin-top:40px;
+	margin-top:40px;
 }
 .thankImg{
-    max-width: -webkit-fill-available;
+	max-width: -webkit-fill-available;
 }
 
 .thankText{
-    text-align: center;
+	text-align: center;
     font-size: 22px;
     font-weight: bold;
     color: #212121;
-    margin-top:40px;
+	margin-top:40px;
 }
 
 .btn-center{
-    left: 50%;
+	left: 50%;
     position: absolute;
     -ms-transform: translateY(-50%);
     transform: translateX(-50%);
@@ -155,7 +140,7 @@ a:hover{
 }
 
 .p-btm{
-    padding-bottom: 100px;
+	padding-bottom: 100px;
 }
 
 button:focus, button:disabled {

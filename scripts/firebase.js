@@ -16,5 +16,8 @@ firebase.analytics();
 // A reference to the database service
 var database = firebase.firestore();
 
+// A reference to firebase storage
+var storage = firebase.storage();
+
 // A authentication service
 var auth = firebase.auth();
