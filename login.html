@@ -26,7 +26,7 @@
             transform: translate(-50%, -50%);padding: 15px;padding: 30px;">
                 <form action="/examples/actions/confirmation.php" method="post">
                     <!--<h1 class="text1">TOMATO</h1>-->
-                    <center><img src="img/Logo_Tomato.png" style="width: 300px;"></center>
+                    <center><img src="img/logo_tomato.png" style="width: 300px;"></center>
                     <p class="text">Hello!</p>
                     
                     
@@ -80,7 +80,7 @@
     function submit_form() {
         login($('#email').val(), $('#password').val(), function(response) {
             if (response.status === 'Success')
-                window.location.href = "addCategory.html";
+                window.location.href = "menu.html";
         })
     }  
   </script>

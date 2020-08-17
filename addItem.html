@@ -23,7 +23,7 @@
 			<div class="shadow_card">
                 <form action="/examples/actions/confirmation.php" method="post">
 					<!--<h1 class="text1">TOMATO</h1>-->
-					<img src="img/Logo_Tomato.png" style="width: 300px;">
+					<img src="img/logo_tomato.png" style="width: 300px;">
                     <p class="text label_text" style="margin-top: 0px;margin-bottom: 0px;">Add Item</p>
                  <div class="container">   
                 <div class="row">
@@ -73,7 +73,7 @@
                       <label for="self order">Veg</label>
                     <input type="radio" name="type" value="nonveg">&nbsp;
                        <label for="takeaway">Non Veg</label>&nbsp;
-                      <input type="radio" name="type" id="vegan" value="vegan">&nbsp;
+                      <input type="checkbox" name="type" id="vegan" value="vegan">&nbsp;
                         <label for="reservation">Vegan</label>&nbsp;
                 </div>
             </div>
@@ -126,6 +126,9 @@
   <script type="text/javascript">
         // TODO: Add listener for the ingredients to list new ingredients added elsewhere
         // Check if the User is logged in
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        var cat = url.searchParams.get("name");
         let user, menuOptions, ingredients, submitIngredients = {}, suggestIngredients = [], addedIngredients = [];
         isLoggedIn(function(response) {
             if (response.status === 'Success') {
@@ -139,7 +142,12 @@
                         $(function() {
                             // Load the options
                             menuOptions.forEach(function(menuOption) {
-                                let option = $('<option></option>').val(menuOption.name).text(menuOption.name);
+                                let option = null;
+                                if (cat === menuOption.name) {
+                                    option = $('<option selected=""></option>').val(menuOption.name).text(menuOption.name);
+                                } else {
+                                    option = $('<option></option>').val(menuOption.name).text(menuOption.name);
+                                }
                                 $('select#menuOptions').append(option);
                             });
 
@@ -221,7 +229,7 @@
                     console.log(data);
                     addItem(user.uid, category, data, function(response) {
                         if (response.status === 'Success')
-                            console.log("Ohhh yesss");
+                            window.location.href="menu.html";
                     })
                 }
             });            

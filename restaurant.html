@@ -22,7 +22,7 @@
 			<div class="modal-body">
                 <form action="/examples/actions/confirmation.php" method="post">
 					<!--<h1 class="text1">TOMATO</h1>-->
-					<img src="img/Logo_Tomato.png" style="width: 300px;">
+					<img src="img/logo_tomato.png" style="width: 300px;">
                     <p class="text" style="margin-top: 0px;">Restaurant Profile</p>
                  <div class="container">   
                 <div class="row">
@@ -104,31 +104,22 @@
         <div class="col-12 label_text">Table Data</div>
         <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group"><b>Table Number</b>
-         <input type="number" class="form-control">
+         <input type="number" id="addTable" class="form-control">
          </div>
        </div> 
        <div class="col-xs-4 col-sm-4 col-md-4">
         <div class="form-group"><b>Number of Guests</b>
-      <input type="number" class="form-control">
+      <input type="number" id="addGuest" class="form-control">
       </div>
     </div>
     <div class="col-4" style="padding-top: 10px;">
         
-        <button type="button" class="btn btn-success">Add New Table</button>
+        <button type="button" onclick="addtoTable()" class="btn btn-success">Add New Table</button>
     </div>
     </div>
     <div class="row">
         <div class="col-8">
-            <div class="row">
-                <div class="col-6 pad-card table-guest">
-                    Table Number: <span class="tables">1</span> Guests: <span class="guests">5</span>
-                </div>
-                <div class="col-6 pad-card table-guest">
-                    Table Number: <span class="tables">2</span> Guests: <span class="guests">6</span>
-                </div>
-                <div class="col-6 pad-card table-guest">
-                    Table Number: <span class="tables">5</span> Guests: <span class="guests">8</span>
-                </div>
+            <div class="row" id="table-list">
             </div>
         </div>
         <div class="col-4">
@@ -190,6 +181,12 @@
   			}
   		});
 
+      function addtoTable() {
+        let table = $('#addTable').val();
+        let guests = $('#addGuest').val();
+        $('#table-list').append('<div class="col-6 table-guest"><div class="pad-card mr-2">Table Number: <span class="tables">' + table + '</span> Guests: <span class="guests">' + guests + '</span></div></div>')
+      }
+
   		function submit_form() {
   			// TODO: Set the changes in available updated data for request
   			let tables = {}
@@ -208,7 +205,7 @@
   							}
   							updateRequest(user.uid, data, function(response) {
   								if (response.status === 'Success')
-  									console.log("Ohhh yesss");
+  									window.location.href = "menu.html";
   							})
   						}
   					});

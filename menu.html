@@ -20,7 +20,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12" style="padding-top: 15px;">
-        <img src="img/Logo_Tomato.png" style="width: 300px;">
+        <img src="img/logo_tomato.png" style="width: 300px;">
         </div>
         <div class="col-12 label_text" style="padding-bottom: 0px;"><h2>Menu</h2></div>
         <div class="label_text col-3">
@@ -105,8 +105,8 @@
         rightPart.append('<br>', descriptionDiv);
         let image = $('<img>').addClass('img-fluid').attr('src', img);
         let leftPart = $('<div></div>').addClass('col-4').append(image);
-        let card = $('<div></div>').addClass('row shadow_card').append(leftPart, rightPart);
-        let enclosure = $('<div></div>').addClass('col-4').append(card);
+        let card = $('<div></div>').addClass('row shadow_card h-100').append(leftPart, rightPart);
+        let enclosure = $('<div></div>').addClass('col-4 pd').append(card);
         $('#menuItems').append(enclosure)
       }
 
@@ -114,7 +114,7 @@
         menuItems(user.uid, $(this).val(), function(response) {
             $('#menuItems').html('');
             response.items.forEach(function(item) {
-                let type = (item.menu_type ? item.menu_type + (item.is_vegan ? "+ vegan": "") : (item.is_vegan ? "vegan": "")) 
+                let type = (item.menu_type ? item.menu_type + (item.is_vegan ? "+ Vegan": "") : (item.is_vegan ? "Vegan": "")) 
                 displayItem(item.name, type, item.description, item.ingredients, item.image_url);
             })
         });
