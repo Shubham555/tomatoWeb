@@ -20,7 +20,22 @@
 <div class="container">
     <div class="row">
         <div class="col-12" style="padding-top: 15px;">
-        <img src="img/logo_tomato.png" style="width: 300px;">
+<nav class="navbar navbar-static-top">
+                      <a href="#" class="sidebar-toggle"><img src="img/logo_tomato.png" style="width: 300px;">
+                      </a>
+
+                      <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                          <!-- User Account: style can be found in dropdown.less -->
+                          <li class="dropdown user user-menu">
+                            <a href="#">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                              
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
         </div>
         <div class="col-12 label_text" style="padding-bottom: 0px;"><h2>Menu</h2></div>
         <div class="label_text col-3">
@@ -88,6 +103,8 @@
                         });
                     })
                 })
+            } else {
+                window.location.href = "login.html";
             }
         });
 

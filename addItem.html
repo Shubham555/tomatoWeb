@@ -212,7 +212,7 @@
             let imageFile = document.querySelector('input[type="file"]').files[0];
             let ext = imageFile.name.split('.').pop();
             let category = $('#menuOptions').val();
-            let name = 'menus/' + category + '/' + $('#name').val() + ext;
+            let name = 'menus/' + category + '/' + $('#name').val() + '.' + ext;
             storeImage(name, imageFile, function(response) {
                 if (response.status === 'Success') {
                     data = {

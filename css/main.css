@@ -9,6 +9,7 @@ padding: 1rem;
     padding: 10px;
 background: #e1e1e1;
 border-radius: 5px;
+position: relative;
 }
 .label_text{
     font-size: 18px;

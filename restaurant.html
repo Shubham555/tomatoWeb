@@ -13,7 +13,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <link href="css/main.css" rel="stylesheet" />
- 
+ <style type="text/css">
+    .pad-card a {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: red;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        line-height: 20px;
+        text-align: center;
+        font-weight: 600;
+        color: #262626;
+        border-radius: 50%;
+    }   
+ </style>
 </head>
 <body>
 
@@ -55,7 +70,7 @@
 		      <div class="row">
 		         <div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group"><b>Manager Name</b>
-				  <input type="text" class="form-control">
+				  <input type="text" id="manager" class="form-control">
 			      </div>
 		        </div> 
 			 </div>
@@ -118,13 +133,13 @@
     </div>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-12">
             <div class="row" id="table-list">
             </div>
         </div>
-        <div class="col-4">
+<!--         <div class="col-4">
             <button type="button" class="btn btn-success">Change</button>
-        </div>
+        </div> -->
     </div>
 
 		 <div class="form-group">
@@ -165,7 +180,6 @@
   				user = response.user;
   				console.log(user.uid);
   				getRequestById(user.uid, function(data) {
-  					console.log(data);
   					$(function() {
   						$('#fullname').val(data.request.full_name);
   						$('#email').val(data.request.email);
@@ -176,6 +190,7 @@
   						$('#town').val(data.request.town);
   						$('#country').val(data.request.country);
   						$('#post').val(data.request.post);
+              $('#manager').val(data.request.manager_name);
   					});
   				});
   			}
@@ -184,8 +199,14 @@
       function addtoTable() {
         let table = $('#addTable').val();
         let guests = $('#addGuest').val();
-        $('#table-list').append('<div class="col-6 table-guest"><div class="pad-card mr-2">Table Number: <span class="tables">' + table + '</span> Guests: <span class="guests">' + guests + '</span></div></div>')
+        $('#table-list').append('<div class="col-4 table-guest"><div class="pad-card mr-2">Table Number: <span class="tables">' + table + '</span> Guests: <span class="guests">' + guests + '</span><a href="javascript:void(0)">X</a></div></div>')
       }
+
+      $('#table-list').on('click', 'a', function() {
+        $(this).closest('.col-4').remove();
+      });
+
+
 
   		function submit_form() {
   			// TODO: Set the changes in available updated data for request
@@ -198,7 +219,7 @@
   				if (response.status === 'Success') {
   					let imageFile = document.querySelector('input[type="file"]').files[0];
   					let ext = imageFile.name.split('.').pop();
-  					storeImage('logos/' + user.uid + ext, imageFile, function(response) {
+  					storeImage('logos/' + user.uid + '.' + ext, imageFile, function(response) {
   						if (response.status === 'Success') {
   							data = {
   								logo_url: response.url

@@ -174,3 +174,33 @@ const addItem = (id, category, item, callback) => {
 		callback({status: 'Success'});
 	});
 }
+
+const deleteFile = (path) => {
+	let deleteFile = storage.ref().child(path);
+	// Delete the file
+	deleteFile.delete().then(function() {
+	  // File deleted successfully
+	  console.log({status: 'Success'});
+	}).catch(function(error) {
+		console.log({status: 'Failure'});
+	  // Uh-oh, an error occurred!
+	});	
+}
+
+const deleteItemCollection = (id, category, itemName) => {
+	database.collection('restaurants').doc(id).collection('menus').doc(category).collection('items').doc(itemName).delete()
+	.then(function() {
+	    console.log("Document successfully deleted!");
+	}).catch(function(error) {
+	    console.error("Error removing document: ", error);
+	});
+}
+
+const deleteCategoryCollection = (id, category) => {
+	database.collection('restaurants').doc(id).collection('menus').doc(category).delete()
+	.then(function() {
+	    console.log("Document successfully deleted!");
+	}).catch(function(error) {
+	    console.error("Error removing document: ", error);
+	});
+}

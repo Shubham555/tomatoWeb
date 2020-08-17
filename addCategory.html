@@ -71,20 +71,33 @@
                 getCategory(user.uid, function(response) {
                     response.items.forEach(function (item) {
                         let name = $('<div></div>').addClass('col-6 name').text(item.name);
-                        let delBtn = $('<div></div>').addClass('col-6 text-right delete').text('Delete');
+                        let delBtn = $('<div></div>').addClass('col-6 text-right delete text-danger').text('Delete');
                         let row = $('<div></div>').addClass('row').append(name, delBtn);
                         let enclosure = $('<div></div>').addClass('col-4 item').html(row);
 
                         $('.row.items').append(enclosure);
                     });
                 })
+            } else {
+              window.location.href = "login.html";
             }
         });
 
         $('.row.items').on('click', 'div.item', function(event) {
+            let name = $(this).find('.name').text();
+            let div = $(this)
             if (!$(event.target).is('div.delete')) {
-                let name = $(this).find('.name').text();
                 window.location.href = "addItem.html?name=" + name;
+            } else {
+              menuItems(user.uid, name, async function(response) {
+                  response.items.forEach(async function(item) {
+                    let path = item.image_url.split('/').pop().split('?')[0].replace(/%2F/g, '/');
+                    await deleteFile(path);
+                    await deleteItemCollection(user.uid, name, item.name);
+                  });
+                  await deleteCategoryCollection(user.uid, name);
+                  div.remove();
+              });
             }
         });
 
