@@ -15,9 +15,17 @@
  
 </head>
 <body>
-
-<div class="container">
 <!-- Modal HTML -->
+<div class="message container">
+  <div class="alert d-none alert-success alert-dismissible fade show" role="alert">
+    Successfully Logged Out!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>  
+</div>
+<div class="container">
+
 <div class="row">
 			<div class="shadow_card" style=" position: absolute;
             left: 50%;
@@ -69,18 +77,34 @@
   <script type="text/javascript" src="scripts/script.js"></script>
   <script type="text/javascript">
     // Check if the User is logged in
-    // let user;
-    // isLoggedIn(function(response) {
-    //     if (response.status === 'Success') {
-    //         user = response.user;
-    //         window.location.href="addCategory.html";
-    //     }
-    // });
+    let user;
+            var url_string = window.location.href
+        var url = new URL(url_string);
+        var status = url.searchParams.get("status");
+
+      $(function () {
+        if (status === 'Success')
+          $('.alert.alert-success').removeClass('d-none');
+
+      });
+    isLoggedIn(function(response) {
+        if (response.status === 'Success') {
+            user = response.user;
+            window.location.href="menu.html";
+        }
+    });
+
+    function message (type, msg) {
+      let message = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert"><strong>Failure!</strong> ' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+      $('.message').html(message);
+    }    
 
     function submit_form() {
         login($('#email').val(), $('#password').val(), function(response) {
             if (response.status === 'Success')
                 window.location.href = "menu.html";
+            else
+              message('danger', response.error)
         })
     }  
   </script>

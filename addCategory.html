@@ -67,6 +67,10 @@
         isLoggedIn(function(response) {
             if (response.status === 'Success') {
                 user = response.user;
+                getRequestById(user.uid, function(response) {
+                    if (!response.request.is_activated)
+                        window.location.href = 'thank-you.html';
+                })                
                 console.log(user.uid);
                 getCategory(user.uid, function(response) {
                     response.items.forEach(function (item) {
@@ -91,7 +95,7 @@
             } else {
               menuItems(user.uid, name, async function(response) {
                   response.items.forEach(async function(item) {
-                    let path = item.image_url.split('/').pop().split('?')[0].replace(/%2F/g, '/');
+                    let path = item.image_url.split('/').pop().split('?')[0].replace(/%2F/g, '/').replace(/%20/g, ' ');
                     await deleteFile(path);
                     await deleteItemCollection(user.uid, name, item.name);
                   });

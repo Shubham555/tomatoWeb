@@ -5,6 +5,56 @@ border-radius: 16px;
 flex: 1 1 auto;
 padding: 1rem;
 }
+    .imagePreview {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background-position: center center;
+      background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+      background-color:#fff;
+      background-size: cover;
+      background-repeat:no-repeat;
+      display: inline-block;
+      box-shadow:0px 0px 10px 2px rgba(0,0,0,0.2);
+    }
+    .btn-primary
+    {
+      display:block;
+      border-radius:0px;
+      min-width: fit-content;
+      box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+      margin-top:-5px;
+    }
+    .imgUp
+    {
+      margin-bottom:15px;
+    }
+    .del
+    {
+      position:absolute;
+      top:0px;
+      right:15px;
+      width:30px;
+      height:30px;
+      text-align:center;
+      line-height:30px;
+      background-color:rgba(255,255,255,0.6);
+      cursor:pointer;
+    }
+    .imgAdd
+    {
+      width:30px !important;
+      height:30px;
+      border-radius:50%;
+      background: #ff2d2d !important;
+      color:#fff;
+      box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
+      text-align:center;
+      line-height:30px;
+      margin-top:0px;
+      cursor:pointer;
+    }
 .pad-card{
     padding: 10px;
 background: #e1e1e1;
@@ -20,6 +70,13 @@ padding: 20px 15px;
 
 #menuItems .pd {
   padding: 1rem 1.5rem;
+}
+
+a.edit, a.delete {
+  font-size: 12px;
+  margin-right: 10px;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .row.items .row {
@@ -97,6 +154,10 @@ body {
 }
 .hint-text a:hover{
     text-decoration: none;
+}
+form input.form-control.error {
+  border: 1px solid #E3262F;
+  border-radius: 10px;
 }
 .text1 {
     text-align: center;

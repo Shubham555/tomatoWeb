@@ -28,21 +28,28 @@
                  <div class="container">   
                 <div class="row">
                     <div class="col-12" style="padding-bottom: 20px;">
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Upload Logo</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                          </div>
+                        <div class="container">
+                          <div class="row">
+                          <div class="col-lg-4 col-12 imgUp text-left">
+                            <div class="imagePreview"></div>
+                                <label class="d-block h-25 input100">
+                                    Upload Picture <i class="fa fa-plus imgAdd"></i><input type="file" name="profilePic" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                </label>
+                          </div><!-- col-2 -->                          
+                         </div><!-- row -->
+                        </div><!-- container -->
                     </div>
                     <br><br>
 				  <div class="col-xs-4 col-sm-4 col-md-4">
-					<div class="form-group"><b>Menu Item</b>
-						 <input type="text" id="name" class="form-control">
+					<div class="form-group"><b>Menu Item <span class="text-danger">*</span></b>
+						 <input type="text" id="name" class="form-control" onfocusout="validator(this)" required>
+                         <span for="name" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
                     </div>
 				  </div> 
 
 				  <div class="col-xs-3 col-sm-3 col-md-3">
 					<div class="form-group">
-                        <label for="menuOptions">Menu Options</label>
+                        <label for="menuOptions" class="mb-0"><strong>Menu Options <span class="text-danger">*</span></strong></label>
                         <select class="form-control" id="menuOptions">
                           
                         </select>
@@ -50,8 +57,9 @@
 				</div> 
 
 				<div class="col-xs-5 col-sm-5 col-md-5">
-					<div class="form-group"><b>Enter Price</b>
-						<input type="number" id="price" class="form-control">
+					<div class="form-group"><b>Enter Price <span class="text-danger">*</span></b>
+						<input type="number" id="price" class="form-control" onfocusout="validator(this)" required>
+                        <span for="price" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
                     </div>
 				</div> 
 		   </div>
@@ -69,12 +77,12 @@
 		<div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group"><b class="label_text">Select Type</b> <br><br>
-                    <input type="radio" name="type" value="veg"  checked="">&nbsp;
-                      <label for="self order">Veg</label>
-                    <input type="radio" name="type" value="nonveg">&nbsp;
-                       <label for="takeaway">Non Veg</label>&nbsp;
+                    <input type="radio" name="type" id="veg" value="Veg"  checked="">&nbsp;
+                      <label for="veg">Veg</label>
+                    <input type="radio" name="type" id="nonveg" value="Non-Veg">&nbsp;
+                       <label for="nonveg">Non Veg</label>&nbsp;
                       <input type="checkbox" name="type" id="vegan" value="vegan">&nbsp;
-                        <label for="reservation">Vegan</label>&nbsp;
+                        <label for="vegan">Vegan</label>&nbsp;
                 </div>
             </div>
 	</div>
@@ -88,7 +96,7 @@
                 <br>
                 <input type="text" id="newIngredient" class="form-control" placeholder="Enter Ingredients Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                  <span class="input-group-text" onclick="pushIngredient()" id="basic-addon2">Add</span>
+                  <span class="input-group-text" onclick="pushIngredient($('#newIngredient').val())" id="basic-addon2">Add</span>
                 </div>
               </div>
               
@@ -98,7 +106,8 @@
         </div>
         <div class="form-group">
             <button type="button" onclick="submit_form()" class="btn btn-block">Submit</button>
-        </div>        
+            <a href="addCategory.html" class="btn btn-success">Add Category</a>
+        </div>
 </div> 
    
 
@@ -129,7 +138,8 @@
         var url_string = window.location.href
         var url = new URL(url_string);
         var cat = url.searchParams.get("name");
-        let user, menuOptions, ingredients, submitIngredients = {}, suggestIngredients = [], addedIngredients = [];
+        var itemName = url.searchParams.get("title");
+        let user, menuOptions, ingredients, submitIngredients = {}, suggestIngredients = [], addedIngredients = [], img_url;
         isLoggedIn(function(response) {
             if (response.status === 'Success') {
                 user = response.user;
@@ -158,6 +168,29 @@
                             $('#newIngredient').autocomplete({
                               source: suggestIngredients
                             });
+
+                            if (itemName) {
+                                menuItem(user.uid, cat, itemName, function(response) {
+                                    let item = response.item;
+                                    console.log(item);
+                                    if (item.image_url) {
+                                        $('.imagePreview').css('background-image', 'url(' + item.image_url + ')');
+                                        img_url = item.image_url;
+                                    }
+                                    $('#name').val(item.name);
+                                    $('#price').val(item.price);
+                                    $('#description').val(item.description);
+                                    if (item.menu_type === 'Veg') {
+                                        $('#veg').prop('checked', true);
+                                    } else {
+                                        $('#nonveg').prop('checked', true);
+                                    }
+                                    $('input#vegan').prop('checked', item.is_vegan);
+                                    for (let ingredient in item.ingredients) {
+                                        pushIngredient(ingredient);
+                                    };
+                                });                                
+                            }
                         });                        
                     });
                 });
@@ -175,8 +208,7 @@
             });
         }
 
-        function pushIngredient() {
-            let ingredient = $('#newIngredient').val();
+        function pushIngredient(ingredient) {
             let index = -1;
             addedIngredients.some(function(element, i) {
                 if (ingredient.toLowerCase() === element.toLowerCase()) {
@@ -195,13 +227,16 @@
             }
         }
 
-        function submit_form() {
+        async function submit_form() {
+            console.log($('#name'), $('#price'));
+            if (!validator($('#name')[0]) || !validator($('#price')[0]))
+                return false;
             addedIngredients.forEach(function(ingredient) {
                 if (suggestIngredients.includes(ingredient)) {
                     let add = ingredients.find(x => x.name === ingredient);
                     submitIngredients[add.name] = add.is_allergent;
                 } else {
-                    addedIngredient(ingredient, function(response) {
+                    addIngredient(ingredient, function(response) {
                         if (response === 'Success') {
                             submitIngredients[ingredient] = false;
                         }
@@ -209,31 +244,88 @@
                 }
             });
             console.log(submitIngredients);
-            let imageFile = document.querySelector('input[type="file"]').files[0];
-            let ext = imageFile.name.split('.').pop();
             let category = $('#menuOptions').val();
-            let name = 'menus/' + category + '/' + $('#name').val() + '.' + ext;
-            storeImage(name, imageFile, function(response) {
-                if (response.status === 'Success') {
-                    data = {
-                        category: category,
-                        description: $('#description').val(),
-                        image_url: response.url,
-                        ingredients: submitIngredients,
-                        menu_type: $("input[name='type']:checked").val(),
-                        is_vegan: $('input#vegan').is(':checked'),
-                        name: $('#name').val(),
-                        price: $('#price').val(),
-                        timestamp: new Date()
+            let data = {
+                category: category,
+                description: $('#description').val(),
+                ingredients: submitIngredients,
+                menu_type: $("input[name='type']:checked").val(),
+                is_vegan: $('input#vegan').is(':checked'),
+                name: $('#name').val(),
+                price: $('#price').val(),
+                timestamp: new Date()
+            }            
+            let imageFile = document.querySelector('input[type="file"]').files[0];
+            if (imageFile) {
+                let ext = imageFile.name.split('.').pop();
+                let name = 'menus/' + category + '/' + $('#name').val() + '.' + ext;
+                if (img_url) {
+                    let path = img_url.split('/').pop().split('?')[0].replace(/%2F/g, '/').replace(/%20/g, ' ');
+                    await deleteFile(path);
+                }
+                await storeImage(name, imageFile, async function(response) {
+                    console.log('File Stored', response);
+                    if (response.status === 'Success') {
+                        console.log(data);
+                        img_url = response.url;
                     }
-                    console.log(data);
+
+                    if (img_url) {
+                        data['image_url'] = img_url;
+                    }
+
+                    if (itemName) {
+                        await deleteItemCollection(user.uid, category, itemName);
+                    }
                     addItem(user.uid, category, data, function(response) {
                         if (response.status === 'Success')
                             window.location.href="menu.html";
-                    })
+                    });                    
+                });
+            } else {
+            
+                if (img_url) {
+                    data['image_url'] = img_url;
                 }
-            });            
+
+                if (itemName) {
+                    await deleteItemCollection(user.uid, category, itemName);
+                }
+                addItem(user.uid, category, data, function(response) {
+                    if (response.status === 'Success')
+                        window.location.href="menu.html";
+                });
+            }
         }
+
+        $(function() {
+            $('.row.items').on('click', '.delete', function() {
+                var name = $(this).closest('.item').find('.name').text();
+                var index = addedIngredients.indexOf(name);
+                if (index > -1) {
+                    addedIngredients.splice(index, 1);
+                    $(this).closest('.item').remove();
+                }
+            });
+            $(document).on("change",".uploadFile", function()
+            {
+                console.log("yes");
+                    var uploadFile = $(this);
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+
+                    reader.onloadend = function(){ // set image data as background of div
+                        //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+        uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+                    }
+                }
+
+            });            
+        })        
   </script>              
 </body>
 </html>

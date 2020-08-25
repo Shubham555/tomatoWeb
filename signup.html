@@ -15,6 +15,9 @@
 <link href="css/main.css" rel="stylesheet" />
  </head>
 <body>
+	<div class="message container">
+		
+	</div>
 <!-- Modal HTML -->
 			<div class="modal-body">
                 <form action="/examples/actions/confirmation.php" method="post">
@@ -25,19 +28,22 @@
                 <div class="row">
 				  <div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group"><b>First Name</b>
-						 <input type="text" id="firstname" class="form-control">
+						 <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="firstname" class="form-control" required="">
+						 <span for="firstname" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
                     </div>
 				  </div> 
 
 				  <div class="col-xs-3 col-sm-3 col-md-3">
 					<div class="form-group"><b>Last Name</b>
-						<input type="text" id="lastname" class="form-control">
+						<input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="lastname" class="form-control" required="">
+						<span for="lastname" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
                     </div>
 				</div> 
 
 				<div class="col-xs-5 col-sm-5 col-md-5">
 					<div class="form-group"><b>Email</b>
-						<input type="email" id="email" class="form-control">
+						<input type="email" onfocusout="validator(this)" oninvalid="validator(this)" id="email" class="form-control" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+						<span for="email" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
                     </div>
 				</div> 
 		   </div>
@@ -45,13 +51,15 @@
 		      <div class="row">
 		         <div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group"><b>Contact Number</b>
-				  <input type="number" id="contact" class="form-control">
+				  <input type="phone" onfocusout="validator(this)" oninvalid="validator(this)" id="contact" class="form-control" required="">
+				  <span for="contact" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 			      </div>
 		        </div> 
 
 		         <div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group"><b>Company Name</b>
-				  <input type="text" id="company" class="form-control">
+				  <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="company" class="form-control" required="">
+				  <span for="company" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 			      </div>
 		        </div>		        
 			 </div>
@@ -59,13 +67,15 @@
 			 <div class="row">
 				<div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group"><b>Password</b>
-				 <input type="password" id="password" class="form-control">
+				 <input type="password" onfocusout="validator(this)" oninvalid="validator(this)" id="password" class="form-control" minlength="6" required="">
+				 <span for="password" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 				 </div>
 			   </div>
 			   
 			   <div class="col-xs-3 col-sm-3 col-md-3">
 				<div class="form-group"><b>Confirm Password</b>
-			  <input type="password" class="form-control">
+			  <input type="password" onfocusout="validator(this)" oninvalid="validator(this)" id="vpassword" class="form-control" required="">
+			  <span for="vpassword" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 			  </div>
 			</div>
 		</div>
@@ -74,12 +84,14 @@
 		<div class="row">
 			<div class="col-xs-7 col-sm-7 col-md-7">
 				<div class="form-group"><b>Restaurant Name</b>
-			 <input type="text" id="restaurant_name" class="form-control">
+			 <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="restaurant_name" class="form-control" required="">
+			 <span for="restaurant_name" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 			 </div>
 		   </div> 
 		   <div class="col-xs-5 col-sm-5 col-md-5">
 			<div class="form-group"><b>VAT Registration</b>
-		  <input type="text" id="vat" class="form-control">
+		  <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="vat" class="form-control" required="">
+		  <span for="vat" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 		  </div>
 		</div>
 	</div>
@@ -87,12 +99,14 @@
 		<div class="row">
 			<div class="col-xs-7 col-sm-7 col-md-7">
 				<div class="form-group"><b>First Line Address</b>
-			 <input type="text" class="form-control">
+			 <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="first_line_address" class="form-control" required="">
+			 <span for="" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 			 </div>
 		   </div> 
 		   <div class="col-xs-5 col-sm-5 col-md-5">
 			<div class="form-group"><b>Street Name</b>
-		  <input type="text" id="street" class="form-control">
+		  <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="street" class="form-control" required="">
+		  <span for="street" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 		  </div>
 		</div>
 	</div>
@@ -100,22 +114,26 @@
 	         <div class="row">
 		           <div class="col-xs-3 col-sm-3 col-md-3">
 					<div class="form-group"><b>Town/City</b>
-		            <input type="text" id="town" class="form-control">
+		            <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="town" class="form-control" required="">
+		            <span for="town" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 		          </div>
 	           </div> 
 			   <div class="col-xs-3 col-sm-3 col-md-3">
 				<div class="form-group"><b>State</b>
-	               <input type="text" id="state" class="form-control">
+	               <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="state" class="form-control" required="">
+	               <span for="state" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 	            </div>
 		   </div>
 		         <div class="col-xs-3 col-sm-3 col-md-3">
 					<div class="form-group"><b>Country</b>
-			     <input type="text" id="country" class="form-control">
+			     <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="country" class="form-control" required="">
+			     <span for="country" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 		     </div>
 	       </div>
 		        <div class="col-xs-3 col-sm-3 col-md-3">    
 					<div class="form-group"><b>Post Code</b>
-		           <input type="text" id="post" class="form-control">
+		           <input type="text" onfocusout="validator(this)" oninvalid="validator(this)" id="post" class="form-control" required="">
+		           <span for="post" style="font-family: Poppins-Regular; font-size: 13px; color: #DC567E;"></span>
 	          </div>
          </div>
       </div>
@@ -123,9 +141,9 @@
 	  <div class="row">
 		<div class="col-xs-6 col-sm-6 col-md-6">
 			<div class="form-group"><b>Functionalities You want to Activate</b> <br>
-				<input name="functionalities" value="Self Order" type="checkbox" checked="checked">&nbsp;
+				<input name="functionalities" value="Self Order" type="checkbox">&nbsp;
 				  <label for="self order">Self Order</label>
-				<input name="functionalities" value="Takeaway" type="checkbox" checked="checked">&nbsp;
+				<input name="functionalities" value="Takeaway" type="checkbox">&nbsp;
 				   <label for="takeaway">Takeaway</label>&nbsp;
 				  <input name="functionalities" value="Reservation" type="checkbox">&nbsp;
 					<label for="reservation">Reservation</label>&nbsp;
@@ -170,7 +188,7 @@
   <!-- Add Firebase products that you want to use -->
   <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
 
   <script type="text/javascript" src="scripts/firebase.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>  
@@ -183,6 +201,11 @@
   		// 		window.location.href = 'addCategory.html';
   		// 	}
   		// });
+  		function message (type, msg) {
+  			let message = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert"><strong>Failure!</strong> ' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+  			$('.message').html(message);
+  		}
+
   		function submit_form() {
   			let functionalities = [];
             $.each($("input[name='functionalities']:checked"), function(){
@@ -195,41 +218,67 @@
             // Store User Data
             if ($('#post').val()) {
             	$.get('https://api.postcodes.io/postcodes/' + $('#post').val(), function(data) {
+            		console.log(data.status);
             		if (data.status === 200) {
-            			let d = new Date(new Date().toDateString());
-			  			const user =  {
-							company: $('#company').val() || null,
-							contact: $('#contact').val() || null,
-							cuisine_type: $('#cuisines').val() || null,
-							country: $('#country').val() || null,
-							email: $('#email').val(),
-							password: $('#password').val(),
-							first_line_address: $('#first_line_address').val() || null,
-							firstname: $('#firstname').val() || null,
-							lastname: $('#lastname').val() || null,
-							registration_date: d,
-							functionalities: functionalities,
-							has_branches: has_branches,
-							post: $('#post').val() || null,
-							restaurant_name: $('#restaurant_name').val() || null,
-							self_order_count: 0,
-							state: $('#state').val() || null,
-							street: $('#street').val() || null,
-							table_reservation_count: 0,
-							takeaway_count: 0,
-							town: $('#town').val() || null,
-							vat: $('#vat').val() || null,
-							lat: data.result.latitude,
-							long: data.result.longitude		
-						}
-						register(user, function(response) {
-							console.log(response);
-							if (response.status === 'Success')
-								window.location.href = 'restaurant.html';
-						});						
+            			let stat = true;
+            			$('input').each(function() {
+            				if (!validator(this)) {
+            					console.log(this);
+            					stat = false;
+            				}
+            			}); 
+            			console.log(stat)
+            			if (stat) {
+	            			let d = new Date(new Date().toDateString());
+				  			const user =  {
+								company: $('#company').val() || null,
+								contact: $('#contact').val() || null,
+								cuisine_type: $('#cuisines').val() || null,
+								country: $('#country').val() || null,
+								email: $('#email').val(),
+								password: $('#password').val(),
+								first_line_address: $('#first_line_address').val() || null,
+								firstname: $('#firstname').val() || null,
+								lastname: $('#lastname').val() || null,
+								registration_date: d,
+								functionalities: functionalities,
+								has_branches: has_branches,
+								post: $('#post').val() || null,
+								restaurant_name: $('#restaurant_name').val() || null,
+								self_order_count: 0,
+								state: $('#state').val() || null,
+								street: $('#street').val() || null,
+								vat: $('#vat').val() || null,
+								table_reservation_count: 0,
+								takeaway_count: 0,
+								town: $('#town').val() || null,
+								vat: $('#vat').val() || null,
+								lat: data.result.latitude,
+								long: data.result.longitude		
+							}
+							register(user, function(response) {
+								console.log(response);
+								if (response.status === 'Success')
+									window.location.href = 'restaurant.html';
+								else
+									message('danger', response.error);
+							});
+						}			
+            		} else {
+			  			console.log(error)
+					    $('#post').addClass('error');
+					    $("span[for='post']").text('Invalid Post Code');
             		}
-            	});
-            }						
+            	}).fail(function(e) { 
+				  if (e.status == 404) {
+				    $('#post').addClass('error');
+				    $("span[for='post']").text('Invalid Post Code');
+				  }
+				});
+            } else {
+				$('#post').addClass('error');
+				$("span[for='post']").text('Invalid Post Code');
+            }					
   		}  	
   	$(function() {
 

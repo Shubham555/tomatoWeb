@@ -16,7 +16,9 @@
  
 </head>
 <body>
-
+<!-- Modal HTML -->
+<div class="message container">
+</div>
 <div class="container">
     <div class="row">
         <div class="col-12" style="padding-top: 15px;">
@@ -28,8 +30,8 @@
                         <ul class="nav navbar-nav">
                           <!-- User Account: style can be found in dropdown.less -->
                           <li class="dropdown user user-menu">
-                            <a href="#">
-                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <a href="#" id="logout">
+                                <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout
                               
                             </a>
                           </li>
@@ -83,6 +85,10 @@
             if (response.status === 'Success') {
                 user = response.user;
                 console.log(user.uid);
+                getRequestById(user.uid, function(response) {
+                    if (!response.request.is_activated)
+                        window.location.href = 'thank-you.html';
+                })
                 // Get the menu options
                 getCategory(user.uid, function(response) {
                     menuOptions = response.items;
@@ -97,7 +103,7 @@
                         menuItems(user.uid, menuOptions[0].name, function(response) {
                             $('#menuItems').html('');
                             response.items.forEach(function(item) {
-                                let type = (item.menu_type ? item.menu_type + (item.is_vegan ? "&nbsp;+ vegan": "") : (item.is_vegan ? "vegan": "")) 
+                                let type = (item.menu_type ? item.menu_type + (item.is_vegan ? " + vegan": "") : (item.is_vegan ? "vegan": "")) 
                                 displayItem(item.name, type, item.description, item.ingredients, item.image_url);
                             })
                         });
@@ -108,11 +114,22 @@
             }
         });
 
+        $('#logout').click(function() {
+            logout(function(response) {
+                if (response.status === 'Success')
+                    window.location.href = 'login.html?status=Success'
+            })
+        });
+
       function displayItem(title, type, description, ingredients, img) {
+        let editFa = $('<i></i>').addClass('fa fa-edit');
+        let delFa = $('<i></i>').addClass('fa fa-trash-alt');
+        let edit = $('<a href="addItem.html?name=' + $('#menuOptions').val() +'&title=' + title + '"></a>').addClass('text-primary edit').append(editFa, 'Edit');
+        let del = $('<a href="javascript:void(0)" data-id="' + title + '"></a>').addClass('text-danger delete').append(delFa, 'Delete');
         let titleDiv = $('<h4></h4>').text(title);
         let typeDiv = $('<span style="font-size: 0.75rem;"></span>').text(type);
         let descriptionDiv = $('<span style="font-size: 0.8rem;"></span>').text(description);
-        let rightPart = $('<div></div>').addClass('col-8').append(titleDiv, typeDiv, '<br>');
+        let rightPart = $('<div></div>').addClass('col-8').append(titleDiv, edit, del, '<br>', typeDiv, '<br>');
         for (const ingredient in ingredients) {
             if (ingredients[ingredient]) {
                 let span = $('<span></span>').addClass('mr-2 badge badge-secondary').text(ingredient);
@@ -127,11 +144,35 @@
         $('#menuItems').append(enclosure)
       }
 
+      function message (type, msg) {
+        let message = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+        $('.message').html(message);
+      } 
+
+      $(function() {
+        $('#menuItems').on('click', '.delete', function() {
+          let title = $(this).data('id');
+          let category = $('#menuOptions').val();
+          console.log(title)
+          menuItem(user.uid, category, title, async function(data) {
+            console.log(data)
+            let item = data.item;
+            let path = item.image_url.split('/').pop().split('?')[0].replace(/%2F/g, '/').replace(/%20/g, ' ');
+            if (path) {
+              await deleteFile(path);
+            }
+            await deleteItemCollection(user.uid, category, item.name);
+          });
+          $(this).closest('.col-4.pd').remove();
+          message('success', 'Item ' + title + ' has been removed from the menu list')
+        });
+      });
+
       $('#menuOptions').change(function () {
         menuItems(user.uid, $(this).val(), function(response) {
             $('#menuItems').html('');
             response.items.forEach(function(item) {
-                let type = (item.menu_type ? item.menu_type + (item.is_vegan ? "+ Vegan": "") : (item.is_vegan ? "Vegan": "")) 
+                let type = (item.menu_type ? item.menu_type + (item.is_vegan ? " + Vegan": "") : (item.is_vegan ? "Vegan": "")) 
                 displayItem(item.name, type, item.description, item.ingredients, item.image_url);
             })
         });

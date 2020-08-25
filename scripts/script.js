@@ -59,7 +59,9 @@ const register = (user, callback) => {
 const login = (email, password, callback) => {
 	auth.signInWithEmailAndPassword(email, password).then(function(response) {
 		callback({status: 'Success', data: response.user});
-	})
+	}).catch(function(err) {
+		callback({status: 'Failure', error: err});
+	});
 } 
 
 const isLoggedIn = (callback) => {
@@ -145,6 +147,13 @@ const menuItems = (id, name, callback) => {
 			items.push(doc.data());
 		});
 		callback({items});
+	});
+}
+
+const menuItem = (id, name, title, callback) => {
+	database.collection('restaurants').doc(id).collection('menus').doc(name).collection('items').doc(title).get()
+	.then((item) => {
+		callback({status: 'Success', item: item.data()});
 	});	
 }
 
@@ -204,3 +213,32 @@ const deleteCategoryCollection = (id, category) => {
 	    console.error("Error removing document: ", error);
 	});
 }
+
+const logout = (callback) => {
+	firebase.auth().signOut().then(function() {
+	  callback({status: 'Success'});
+	}, function(error) {
+	  callback({status: 'Failure'});
+	});
+}
+
+
+function validator(field) {
+  if (field.validity.valueMissing) {
+    field.setCustomValidity('*Required');
+    $(field).addClass('error');
+    $("span[for='" + $(field).attr('id') + "']").text(field.validationMessage);
+    return false;
+  } else if (field.validity.typeMismatch || field.validity.patternMismatch) {
+    field.setCustomValidity('*Invalid Format');
+    $(field).addClass('error');
+    $("span[for='" + $(field).attr('id') + "']").text(field.validationMessage);
+    return false;
+  } else {
+    field.setCustomValidity('');
+    $(field).removeClass('error');
+    $("span[for='" + $(field).attr('id') + "']").text(field.validationMessage);
+    return true;
+  }
+  return true;
+}  	
